@@ -1,5 +1,6 @@
-<header class="fixed top-0 left-0 w-full z-50 font-sans text-gray-900 transition-colors duration-300"
-    [class.bg-white]="showMegaMenu()" [class.bg-sky-300]="!showMegaMenu()">
+<header class="fixed top-0 left-0 w-full z-50 font-sans text-gray-900 transition-transform duration-300"
+    [class.bg-white]="showMegaMenu()" [class.bg-white/80]="!showMegaMenu()" [class.backdrop-blur-lg]="!showMegaMenu()"
+    [class.-translate-y-full]="isHeaderHidden()">
     <!-- Top Navigation Bar -->
     <div class="max-w-[1000px] mx-auto px-6 h-20 flex items-center justify-between">
         <!-- Left Side: Logo & Nav Pills -->
@@ -16,7 +17,7 @@
                         class="px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200"
                         [class.bg-gray-200]="showMegaMenu() && activeTab() === item.id"
                         [class.text-gray-900]="showMegaMenu() && activeTab() === item.id"
-                        [class.text-gray-500]="!showMegaMenu() || activeTab() !== item.id"
+                        [class.text-gray-600]="!showMegaMenu() || activeTab() !== item.id"
                         [class.hover:text-gray-900]="!showMegaMenu() || activeTab() !== item.id">
                         {{ item.label }}
                     </button>
@@ -29,7 +30,7 @@
         <div class="flex items-center gap-4">
             <button
                 class="px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-black hover:text-white transition-colors"
-                [class.text-black]="showMegaMenu()" [class.text-gray-200]="!showMegaMenu()">
+                [class.text-black]="showMegaMenu()" [class.text-gray-600]="!showMegaMenu()">
                 Log in
             </button>
             <button

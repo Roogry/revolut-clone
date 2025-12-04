@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID, signal } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { fromEvent, throttleTime } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-header',
@@ -13,8 +15,44 @@ export class HeaderComponent {
     protected readonly activeTab = signal<string | null>(null);
     protected readonly isMegaMenuHovered = signal(false);
     protected readonly isNavHovered = signal(false);
+    protected readonly isHeaderHidden = signal(false);
+
+    private readonly platformId = inject(PLATFORM_ID);
+    private readonly document = inject(DOCUMENT);
 
     protected readonly showMegaMenu = computed(() => this.isNavHovered() || this.isMegaMenuHovered());
+
+    constructor() {
+        effect(() => {
+            if (!this.isNavHovered() && !this.isMegaMenuHovered()) {
+                this.activeTab.set(null);
+            }
+        });
+
+        if (isPlatformBrowser(this.platformId)) {
+            let lastScroll = 0;
+            fromEvent(this.document, 'scroll')
+                .pipe(
+                    throttleTime(20),
+                    takeUntilDestroyed()
+                )
+                .subscribe(() => {
+                    const currentScroll = window.scrollY;
+                    if (currentScroll <= 0) {
+                        this.isHeaderHidden.set(false);
+                        lastScroll = currentScroll;
+                        return;
+                    }
+
+                    if (currentScroll > lastScroll && currentScroll > 50) {
+                        this.isHeaderHidden.set(true);
+                    } else if (currentScroll < lastScroll) {
+                        this.isHeaderHidden.set(false);
+                    }
+                    lastScroll = currentScroll;
+                });
+        }
+    }
 
     protected readonly navItems = [
         { id: 'personal', label: 'Personal' },
