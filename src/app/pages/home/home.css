@@ -1,0 +1,11 @@
+.bg-hero-sky {
+  background-color: linear-gradient(rgb(76 138 204) 0%, rgb(57 145 216) 100%);
+}
+
+.account-left-transform {
+  transform: translateX(calc(-1 * 24px)) translateX(-95%) scale(0.9);
+}
+
+.account-right-transform {
+  transform: translateX(24px) translateX(95%) scale(0.9);
+}

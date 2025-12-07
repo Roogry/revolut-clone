@@ -1,22 +1,155 @@
-<section class="relative h-screen w-full overflow-hidden">
-    <img ngSrc="assets/images/blue_sky_background.png" alt="Blue Sky Background" fill priority
-        class="object-cover -z-10" />
-    <div class="relative z-10 flex items-center justify-center h-full">
-        <h1 class="text-6xl font-bold text-white tracking-tight">Welcome to Moneytor</h1>
+<section class="relative min-h-screen w-full overflow-hidden">
+  <div class="min-h-full relative z-10 pt-[56px] pb-6 px-5">
+    <div class="absolute inset-0 -z-10 overflow-hidden bg-hero-sky">
+      <img
+        ngSrc="assets/images/blue_sky_background.png"
+        alt="Blue Sky Background"
+        fill
+        priority
+        class="object-cover"
+      />
+      <div
+        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[201.6vh] h-[112vh] min-h-[370px] min-w-[665px]"
+      >
+        <img
+          ngSrc="assets/images/woman-confident.png"
+          alt="Woman Confident"
+          fill
+          priority
+          class="object-cover"
+        />
+      </div>
     </div>
+    <div class="pt-12 flex flex-col items-start gap-6">
+      <h1 class="text-[5rem] font-medium text-white leading-[1] tracking-[-0.13rem]">
+        Change the way you money
+      </h1>
+      <p class="text-[1.125rem] leading-[1.5rem] text-white">
+        Home or away, local or global — move freely between countries and currencies. Sign up for
+        free, in a tap.
+      </p>
+      <a
+        href="#"
+        class="inline-block py-[10px] px-6 rounded-full text-white bg-[#191c1f] cursor-pointer transition-colors hover:opacity-[.85]"
+        >Download the app</a
+      >
+    </div>
+
+    <div class="mt-8 flex items-center justify-center">
+      <div class="relative mb-4 w-[49.6063vh] border-[#c9c9cd] border-[3px] rounded-[2.5vh]">
+        <div class="absolute w-full h-full">
+          <img
+            ngSrc="assets/images/hero-account-sample.png"
+            alt="Account Sample"
+            fill
+            class="object-contain -z-10"
+          />
+        </div>
+        <div class="w-full h-[0]" style="padding-bottom: calc(1 / 0.7086614173228346 * 100%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center py-12 md:py-16 lg:py-[80px] px-5">
+    <div class="mb-6 flex flex-col items-center gap-4">
+      <h2 class="font-medium leading-[1] text-[3rem]">Your salary, reimagined</h2>
+      <p class="text-[1.125rem] text-center leading-[1.5rem] text-[#191c1f]">
+        Spend smartly, send quickly, sort your salary automatically, and watch your savings grow —
+        all with Revolut.
+      </p>
+      <a
+        href="#"
+        class="inline-block py-[10px] px-6 mt-4 rounded-full text-white bg-[#191c1f] cursor-pointer transition-colors hover:opacity-[.85]"
+        >Move your salary</a
+      >
+    </div>
+    <div class="self-center relative w-[232px] h-[327.378px]">
+      <div
+        class="absolute w-[232px] h-[327.378px] account-left-transform opacity-100 transition duration-300"
+      >
+        <img
+          ngSrc="assets/images/account-cards/account-card-1.png"
+          alt="Account Sample 1"
+          fill
+          priority
+          class="object-cover rounded-[20px]"
+        />
+      </div>
+      <div class="absolute w-[232px] h-[327.378px] opacity-100 transition duration-300">
+        <img
+          ngSrc="assets/images/account-cards/account-card-2.png"
+          alt="Account Sample 2"
+          fill
+          priority
+          class="object-cover rounded-[20px]"
+        />
+      </div>
+      <div
+        class="absolute w-[232px] h-[327.378px] account-right-transform opacity-100 transition duration-300"
+      >
+        <img
+          ngSrc="assets/images/account-cards/account-card-3.png"
+          alt="Account Sample 3"
+          fill
+          priority
+          class="object-cover rounded-[20px]"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-[1000px] mx-auto px-5 my-12 lg:px-0 lg:my-[80px]">
+  <div class="flex flex-col items-center">
+    <h2
+      class="mb-14 sm:text-center text-[#505a63] text-[1.5rem] leading-[1.75rem] tracking-[-0.015rem] lg:text-[2rem] lg:leading-[2.375rem] lg:tracking-[-0.02rem]"
+    >
+      Join 65+ million customers worldwide and 12 million in the UK
+    </h2>
+    <div class="flex flex-wrap gap-6 items-start justify-center">
+      @for (award of awards; track award.title) {
+        <div class="flex flex-col gap-2 md:gap-4 w-[146px] md:w-[231px]">
+          <div class="relative h-[51px] sm:h-[80px]">
+            <div class="absolute inset-0 w-full h-full">
+              <img ngSrc="{{ award.image }}" alt="{{ award.title }}" fill class="object-cover" />
+            </div>
+          </div>
+          <p class="font-medium text-center text-base leading-[1.375rem] text-[#717173]">
+            {{ award.title }}
+          </p>
+        </div>
+      }
+    </div>
+    <div
+      class="w-full flex flex-wrap gap-6 items-start justify-around px-5 my-12 lg:px-0 lg:my-[80px]"
+    >
+      @for (award of awardBadges; track award.title) {
+        <div class="flex flex-col gap-2 md:gap-4 w-[146px] md:w-[316px]">
+          <div class="relative h-[51px] sm:h-[110px]">
+            <div class="absolute inset-0 w-full h-full">
+              <img ngSrc="{{ award.image }}" alt="{{ award.title }}" fill class="object-cover" />
+            </div>
+          </div>
+          <p class="font-medium text-center text-base leading-[1.375rem] text-[#717173]">
+            {{ award.title }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
 </section>
 
 <section class="py-20 px-6 max-w-[1000px] mx-auto">
-    <h2 class="text-3xl font-bold mb-8">Scroll down to see the header hide</h2>
-    <div class="space-y-6 text-lg text-gray-600">
-        @for (i of [1,2,3,4,5,6,7,8,9,10]; track i) {
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </p>
-        }
-    </div>
+  <h2 class="text-3xl font-bold mb-8">Scroll down to see the header hide</h2>
+  <div class="space-y-6 text-lg text-gray-600">
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    }
+  </div>
 </section>
