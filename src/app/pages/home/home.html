@@ -58,9 +58,9 @@
   </div>
 
   <div class="flex flex-col items-center py-12 md:py-16 lg:py-[80px] px-5">
-    <div class="mb-6 flex flex-col items-center gap-4">
+    <div class="mb-6 flex flex-col items-start md:items-center gap-4">
       <h2 class="font-medium leading-[1] text-[3rem]">Your salary, reimagined</h2>
-      <p class="text-[1.125rem] text-center leading-[1.5rem] text-[#191c1f]">
+      <p class="text-[1.125rem] md:text-center leading-[1.5rem] text-[#191c1f]">
         Spend smartly, send quickly, sort your salary automatically, and watch your savings grow —
         all with Revolut.
       </p>
@@ -128,7 +128,7 @@
       }
     </div>
     <div
-      class="w-full flex flex-wrap gap-6 items-start justify-around px-5 my-12 lg:px-0 lg:my-[80px]"
+      class="w-full flex flex-wrap gap-6 items-start justify-center md:justify-around px-5 my-12 lg:px-0 lg:my-[80px]"
     >
       @for (award of awardBadges; track award.title) {
         <div class="flex flex-col gap-2 md:gap-4 w-[146px] md:w-[316px]">
@@ -147,7 +147,7 @@
 </section>
 
 <section>
-  <div class="relative w-full h-screen min-h-[640px] text-[#f4f4f4]">
+  <div class="relative w-full h-screen min-h-[640px] text-[#f4f4f4] overflow-hidden">
     <div class="absolute top-0 -z-10 w-full h-full">
       <video appParallax [parallaxSpeed]="0.1" autoplay muted class="w-full h-full object-cover">
         <source src="assets/videos/bg-physical-card.mp4" type="video/mp4" />
@@ -282,16 +282,16 @@
   <div class="w-full h-[90vh] min-h-[640px] overflow-hidden">
     <div class="max-w-[1000px] mx-auto py-[48px] h-full lg:py-[64px]">
       <div
-        class="h-full grid items-center justify-between"
+        class="h-full flex flex-col lg:grid lg:items-center lg:justify-between"
         style="grid-template-columns: 488px 450px"
       >
-        <div class="px-5 flex flex-col gap-4 items-start lg:px-0 lg:gap-6">
+        <div class="px-5 flex flex-col gap-4 md:items-center lg:items-start lg:px-0 lg:gap-6">
           <h2
             class="font-medium text-[2.25rem] leading-[1] md:text-[3.75rem] tracking-[-0.0375rem]"
           >
             Your money’s safe space
           </h2>
-          <p class="my-[1em] text-[1.125rem] leading-[1.5rem]">
+          <p class="my-[1em] md:text-center lg:text-left text-[1.125rem] leading-[1.5rem]">
             With Revolut Secure, you’re entering a new era of money security — where our proactive,
             purpose-built defences and team of fraud specialists help protect every account, 24/7.
           </p>
