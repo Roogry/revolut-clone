@@ -1,0 +1,284 @@
+<footer class="bg-[#191c1f] text-white font-aeonik-pro py-[1.25rem]">
+  <!-- Plans Section -->
+  <section class="max-w-[1000px] mx-auto px-6 mb-5">
+    <h2 class="text-[1.75rem] font-medium tracking-[-0.0175rem] leading-[2rem] my-[2.5rem]">
+      Choose your plan
+    </h2>
+
+    <div class="pt-[1.25rem] grid grid-cols-1 md:grid-cols-12 gap-[1rem] lg:gap-[1.5rem]">
+      @for (plan of plans; track plan.name) {
+        <div
+          class="col-span-full {{
+            gridColumnPlan($index)
+          }} w-full bg-white text-gray-900 rounded-[20px] px-[24px] pt-[24px] pb-[16px] flex flex-col justify-between group cursor-pointer"
+        >
+          <div class="flex flex-col gap-[0.5rem]">
+            <h3 class="text-2xl font-medium tracking-[-0.01375rem] leading-[1.625rem]">
+              {{ plan.name }}
+            </h3>
+            <p class="text-lg leading-[1.5rem]">{{ plan.price }}</p>
+            <p
+              class="font-inter text-[#505a63] font-light tracking-[-0.00438rem] leading-[1.375rem] text-sm"
+            >
+              {{ plan.description }}
+            </p>
+          </div>
+          <div class="flex justify-end mt-2">
+            <div
+              class="w-[32px] h-[32px] flex items-center justify-center rounded-full transition duration-300 ease-in-out group-hover:bg-[#191c1f] group-hover:text-white"
+            >
+              <span
+                class="w-[20px] h-[20px] block bg-current"
+                style="
+                  mask-image: url('assets/icons/arrow-thin-right.svg');
+                  mask-repeat: no-repeat;
+                  mask-position: center;
+                "
+              ></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Footer Links Section -->
+  <section class="max-w-[1000px] mx-auto px-6">
+    <!-- Mobile View (Stacked) -->
+    <div class="block md:hidden grid grid-cols-1 gap-y-12 gap-x-8">
+      @for (column of footerLinks; track column.title) {
+        <ng-container *ngTemplateOutlet="linkItem; context: { $implicit: column }"></ng-container>
+      }
+    </div>
+
+    <!-- Tablet View (4 Columns) -->
+    <div class="hidden md:flex lg:hidden gap-4">
+      @for (colGroup of mdColumns; track $index) {
+        <div class="flex-1 flex flex-col">
+          @for (column of colGroup; track column.title) {
+            <ng-container
+              *ngTemplateOutlet="linkItem; context: { $implicit: column }"
+            ></ng-container>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Desktop View (6 Columns) -->
+    <div class="hidden lg:flex gap-6">
+      @for (colGroup of lgColumns; track $index) {
+        <div class="flex-1 flex flex-col">
+          @for (column of colGroup; track column.title) {
+            <ng-container
+              *ngTemplateOutlet="linkItem; context: { $implicit: column }"
+            ></ng-container>
+          }
+        </div>
+      }
+    </div>
+
+    <ng-template #linkItem let-column>
+      <div class="pb-2 pr-4">
+        <h3
+          class="font-semibold py-2 text-white text-[0.75rem] leading-[1.125rem] tracking-[0.0075rem]"
+        >
+          {{ column.title }}
+        </h3>
+        @for (link of column.links; track link) {
+          <a
+            href="#"
+            class="block py-2 text-[#8d969e] hover:text-white transition-colors text-xs leading-[1.125rem] tracking-[0.01125rem]"
+          >
+            {{ link }}
+          </a>
+        }
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Bottom Section -->
+  <section class="px-0 lg:max-w-[1000px] lg:mx-auto lg:px-6">
+    <div class="border-b border-gray-800 mt-10 mb-10 pb-2">
+      <div
+        class="flex flex-col max-w-[1000px] mx-auto px-6 justify-between items-start md:items-center gap-8 md:flex-row lg:px-0"
+      >
+        <a href="#" class="text-2xl font-medium mb-2">Moneytor</a>
+        <div class="flex gap-2 text-[#8b959e]">
+          <!-- Social Icons (Placeholders) -->
+          <a
+            href="#"
+            class="p-2 flex items-center justify-center rounded-full transition duration-300 ease-in-out hover:text-white"
+          >
+            <span
+              class="w-[16px] h-[16px] block bg-current"
+              style="
+                mask-image: url('assets/icons/facebook.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+              "
+            ></span>
+          </a>
+          <a
+            href="#"
+            class="p-2 flex items-center justify-center rounded-full transition duration-300 ease-in-out hover:text-white"
+          >
+            <span
+              class="w-[16px] h-[16px] block bg-current"
+              style="
+                mask-image: url('assets/icons/instagram.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+              "
+            ></span>
+          </a>
+          <a
+            href="#"
+            class="p-2 flex items-center justify-center rounded-full transition duration-300 ease-in-out hover:text-white"
+          >
+            <span
+              class="w-[16px] h-[16px] block bg-current"
+              style="
+                mask-image: url('assets/icons/twitter.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+              "
+            ></span>
+          </a>
+          <a
+            href="#"
+            class="p-2 flex items-center justify-center rounded-full transition duration-300 ease-in-out hover:text-white"
+          >
+            <span
+              class="w-[16px] h-[16px] block bg-current"
+              style="
+                mask-image: url('assets/icons/linkedin.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+              "
+            ></span>
+          </a>
+          <a
+            href="#"
+            class="p-2 flex items-center justify-center rounded-full transition duration-300 ease-in-out hover:text-white"
+          >
+            <span
+              class="w-[16px] h-[16px] block bg-current"
+              style="
+                mask-image: url('assets/icons/tiktok.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: 100% 100%;
+              "
+            ></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="max-w-[1000px] mx-auto px-6 mb-16">
+    <div
+      class="flex flex-col gap-3 mb-8 text-[#8d969e] font-inter text-[0.75rem] leading-[1.125rem] tracking-[0.01125rem] font-light"
+    >
+      <div class="h-[26px] flex items-center gap-2">
+        <img src="assets/images/flags/GB.webp" width="14px" height="14px" alt="GB" />
+        <span>United Kingdom</span>
+      </div>
+      <div class="flex flex-wrap items-center">
+        <a href="#" class="py-1 mr-6 hover:text-white">Website Terms</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">Legal Agreements</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">Complaints</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">Privacy</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">UK Modern Slavery Policy</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">Customer Vulnerability</a>
+        <a href="#" class="py-1 mr-6 hover:text-white">Data Privacy Statement for Candidates</a>
+      </div>
+    </div>
+
+    <div
+      class="text-[#8d969e] font-inter text-[0.75rem] leading-[1.125rem] tracking-[0.01125rem] font-light space-y-5"
+    >
+      <p>&copy; Revolut Ltd {{ currentYear }}</p>
+      <p>
+        To find out more about which Revolut entity you receive services from, please check our
+        corresponding <a href="#" class="underline hover:text-white">FAQ page</a>. If you have any
+        other questions, please reach out to us via the in-app chat in the Revolut app.
+      </p>
+      <p>
+        Revolut Ltd is registered in England and Wales (No. 08804411), is authorised by the
+        Financial Conduct Authority to offer e-money and payment services under the Electronic Money
+        Regulations 2011 (FRN: 900562), and is registered with the Financial Conduct Authority to
+        offer cryptocurrency services under the Money Laundering, Terrorist Financing and Transfer
+        of Funds (Information on the Payer) Regulations 2017. Commodities services are provided by
+        Revolut Ltd and are not regulated by the Financial Conduct Authority.
+      </p>
+      <p>
+        Revolut Travel Ltd (No. 10618740) is authorised by the Financial Conduct Authority to
+        undertake insurance distribution activities (FRN: 780586). Our insurance products are
+        arranged by Revolut Travel Ltd and Revolut Ltd, an appointed representative of Revolut
+        Travel Ltd.
+      </p>
+      <p>
+        Investment services are provided by Revolut Trading Ltd (No. 11567840), which is authorised
+        and regulated by the Financial Conduct Authority (FRN: 933846).
+      </p>
+      <p>
+        The registered address of Revolut Ltd, Revolut Travel Ltd, and Revolut Trading Ltd is at 30
+        South Colonnade, London, United Kingdom, E14 5HX. You can read more about our
+        <a href="#" class="underline hover:text-white">terms and policies here</a>.
+      </p>
+    </div>
+  </section>
+  <section class="max-w-[1000px] mx-auto px-6 mb-11">
+    <div
+      class="font-inter text-[#8b959e] text-[0.75rem] leading-[1.125rem] tracking-[0.01125rem] font-light space-y-5"
+    >
+      <p class="mb-4">
+        <b>
+          <a href="#" class="hover:text-white/80 font-bold underline decoration-solid"
+            >International Money Transfers</a
+          >:
+        </b>
+        <a href="#" class="hover:text-white/80 underline">Send Money to India</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Nigeria</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Poland</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Ghana</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Dubai</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to the UK from India</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Saudi Arabia</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to North Macedonia</a> |
+        <a href="#" class="hover:text-white/80 underline">Send Money to Kazakhstan</a>
+      </p>
+      <p class="mb-4">
+        <b
+          ><a href="#" class="hover:text-white/80 font-bold underline decoration-solid"
+            >Currency Converter</a
+          >:
+        </b>
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to INR</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert USD to GBP</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to EUR</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to USD</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert EUR to GBP</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to PKR</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to TRY</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to HKD</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert KRW to GBP</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert AED to GBP</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert INR to GBP</a> |
+        <a href="#" class="hover:text-white/80 underline">Convert GBP to CAD</a> |
+        <a href="#" class="hover:text-white/80 underline">Compare Exchange Rates</a>
+      </p>
+      <p>
+        <a href="#" class="hover:text-white/80 underline">Revolut USA</a> |
+        <a href="#" class="hover:text-white/80 underline">Revolut Spain</a> |
+        <a href="#" class="hover:text-white/80 underline">Revolut Australia</a> |
+        <a href="#" class="hover:text-white/80 underline">Revolut Singapore</a> |
+        <a href="#" class="hover:text-white/80 underline">Revolut Estonia</a>
+      </p>
+    </div>
+  </section>
+</footer>
