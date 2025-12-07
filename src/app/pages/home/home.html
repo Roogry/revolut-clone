@@ -142,14 +142,7 @@
 <section>
   <div class="relative w-full h-screen min-h-[640px] text-[#f4f4f4]">
     <div class="absolute top-0 -z-10 w-full h-full">
-      <video
-        appParallax
-        [parallaxSpeed]="0.1"
-        autoplay
-        muted
-        playsinline
-        class="w-full h-full object-cover"
-      >
+      <video appParallax [parallaxSpeed]="0.1" autoplay muted class="w-full h-full object-cover">
         <source src="assets/videos/bg-physical-card.mp4" type="video/mp4" />
       </video>
     </div>
@@ -271,6 +264,100 @@
             class="inline-block h-[42px] px-[24px] rounded-full text-[#f4f4f4] bg-[#f4f4f4]/10 border-[2px] border-[#f4f4f4] transition-colors backdrop-blur-lg cursor-pointer hover:bg-[#f4f4f4]/20 hover:opacity-[.85]"
           >
             Moving
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="w-full h-[90vh] min-h-[640px] overflow-hidden">
+    <div class="max-w-[1000px] mx-auto py-[48px] h-full lg:py-[64px]">
+      <div
+        class="h-full grid items-center justify-between"
+        style="grid-template-columns: 488px 450px"
+      >
+        <div class="px-5 flex flex-col gap-4 items-start lg:px-0 lg:gap-6">
+          <h2
+            class="font-medium text-[2.25rem] leading-[1] md:text-[3.75rem] tracking-[-0.0375rem]"
+          >
+            Your money’s safe space
+          </h2>
+          <p class="my-[1em] text-[1.125rem] leading-[1.5rem]">
+            With Revolut Secure, you’re entering a new era of money security — where our proactive,
+            purpose-built defences and team of fraud specialists help protect every account, 24/7.
+          </p>
+          <div class="mt-1 lg:mt-2">
+            <a
+              href="#"
+              class="inline-block max-w-[240px] py-[10px] px-6 rounded-full text-white bg-[#191c1f] cursor-pointer transition-colors hover:opacity-[.85] md:max-w-[440px] lg:max-w-[720px]"
+              >Learn more</a
+            >
+          </div>
+        </div>
+
+        <div class="relative w-full h-full max-h-[446px] lg:max-h-[600px]">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-full aspect-[0.75/1]">
+            <video autoplay muted class="w-full h-full object-cover">
+              <source src="assets/videos/pin-r.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="relative w-full h-screen min-h-[640px] bg-black text-[#f4f4f4] overflow-hidden">
+    <div class="max-w-[1000px] mx-auto py-[48px] h-full lg:py-[64px]">
+      <div class="h-full flex flex-col items-start md:items-center">
+        <div class="mb-6 lg:mb-8">
+          <div class="px-5 flex flex-col gap-4 items-start lg:px-0 lg:items-center lg:gap-6">
+            <h2
+              class="font-medium text-[2.25rem] leading-[1] md:text-[3.75rem] tracking-[-0.0375rem]"
+            >
+              Explore 2,500+ stocks
+            </h2>
+            <div class="w-full flex flex-col items-start md:items-center gap-1 md:gap-2 lg:w-[60%]">
+              <p class="text-[1.125rem] md:text-center leading-[1.5rem]">
+                From Apple to Zoom, invest in some of the biggest and most influential companies in
+                the world, commission-free within your monthly allowance.
+              </p>
+              <span
+                class="font-inter text-[0.75rem] md:text-center leading-[1.125rem] tracking-[0.01125rem]"
+                >Other fees may apply. Capital at risk.
+              </span>
+            </div>
+            <div class="mt-1 lg:mt-2">
+              <a
+                href="#"
+                class="inline-block max-w-[240px] py-[10px] px-6 rounded-full text-black bg-[#f4f4f4] cursor-pointer transition-colors hover:opacity-[.85] md:max-w-[440px] lg:max-w-[720px]"
+                >Try it out</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="relative w-full max-h-[388px] lg:max-h-[500px] flex-auto">
+          <div class="absolute inset-0 left-1/2 -translate-x-1/2 h-full aspect-2/1">
+            <video autoplay muted class="w-full h-full object-cover">
+              <source src="assets/videos/stocks-spin.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
+        <div class="w-full mt-4 px-5 flex gap-3 items-center justify-center md:mt-6 lg:px-0">
+          <button
+            class="inline-block h-[42px] px-[24px] rounded-full text-black bg-[#f4f4f4] transition-colors backdrop-blur-lgcursor-pointer hover:opacity-[.85]"
+          >
+            Stocks
+          </button>
+          <button
+            class="inline-block h-[42px] px-[24px] rounded-full text-[#f4f4f4] bg-[#f4f4f4]/10 border-[2px] border-[#f4f4f4] transition-colors backdrop-blur-lg cursor-pointer hover:bg-[#f4f4f4]/20 hover:opacity-[.85]"
+          >
+            Commodities
           </button>
         </div>
       </div>
