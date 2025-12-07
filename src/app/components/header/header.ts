@@ -15,7 +15,7 @@ export class HeaderComponent {
     protected readonly activeTab = signal<string | null>(null);
     protected readonly isMegaMenuHovered = signal(false);
     protected readonly isNavHovered = signal(false);
-    protected readonly isHeaderHidden = signal(false);
+    protected readonly isScrolled = signal(false);
 
     private readonly platformId = inject(PLATFORM_ID);
     private readonly document = inject(DOCUMENT);
@@ -30,7 +30,6 @@ export class HeaderComponent {
         });
 
         if (isPlatformBrowser(this.platformId)) {
-            let lastScroll = 0;
             fromEvent(this.document, 'scroll')
                 .pipe(
                     throttleTime(20),
@@ -38,18 +37,7 @@ export class HeaderComponent {
                 )
                 .subscribe(() => {
                     const currentScroll = window.scrollY;
-                    if (currentScroll <= 0) {
-                        this.isHeaderHidden.set(false);
-                        lastScroll = currentScroll;
-                        return;
-                    }
-
-                    if (currentScroll > lastScroll && currentScroll > 50) {
-                        this.isHeaderHidden.set(true);
-                    } else if (currentScroll < lastScroll) {
-                        this.isHeaderHidden.set(false);
-                    }
-                    lastScroll = currentScroll;
+                    this.isScrolled.set(currentScroll > 50);
                 });
         }
     }

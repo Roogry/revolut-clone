@@ -20,31 +20,31 @@ describe('HeaderComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should hide header on scroll down and show on scroll up', async () => {
+    it('should update isScrolled based on scroll position', async () => {
         const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-        // Mock window scroll
+        // Initial state (scroll 0)
         Object.defineProperty(window, 'scrollY', { value: 0, writable: true });
         document.dispatchEvent(new Event('scroll'));
         await delay(50);
         fixture.detectChanges();
         // @ts-ignore
-        expect(component.isHeaderHidden()).toBe(false);
+        expect(component.isScrolled()).toBe(false);
 
-        // Scroll down
-        Object.defineProperty(window, 'scrollY', { value: 100, writable: true });
+        // Scroll > 50
+        Object.defineProperty(window, 'scrollY', { value: 51, writable: true });
         document.dispatchEvent(new Event('scroll'));
         await delay(50);
         fixture.detectChanges();
         // @ts-ignore
-        expect(component.isHeaderHidden()).toBe(true);
+        expect(component.isScrolled()).toBe(true);
 
-        // Scroll up
+        // Scroll <= 50
         Object.defineProperty(window, 'scrollY', { value: 50, writable: true });
         document.dispatchEvent(new Event('scroll'));
         await delay(50);
         fixture.detectChanges();
         // @ts-ignore
-        expect(component.isHeaderHidden()).toBe(false);
+        expect(component.isScrolled()).toBe(false);
     });
 });

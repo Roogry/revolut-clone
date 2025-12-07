@@ -1,86 +1,123 @@
-<header class="fixed top-0 left-0 w-full z-50 font-sans text-gray-900 transition-transform duration-300"
-    [class.bg-white]="showMegaMenu()" [class.bg-white/80]="!showMegaMenu()" [class.backdrop-blur-lg]="!showMegaMenu()"
-    [class.-translate-y-full]="isHeaderHidden()">
-    <!-- Top Navigation Bar -->
-    <div class="max-w-[1000px] mx-auto px-6 h-20 flex items-center justify-between">
-        <!-- Left Side: Logo & Nav Pills -->
-        <div class="flex-1 h-full flex items-center gap-8">
-            <!-- Logo -->
-            <a href="#" class="text-2xl font-bold tracking-tight">Moneytor</a>
+<header
+  class="fixed top-0 left-0 w-full z-50 font-aeonik-pro transition-all duration-300"
+  [class.bg-white]="showMegaMenu()"
+  [class.bg-white/80]="isScrolled() && !showMegaMenu()"
+  [class.backdrop-blur-lg]="isScrolled() && !showMegaMenu()"
+  [class.bg-transparent]="!isScrolled() && !showMegaMenu()"
+>
+  <!-- Top Navigation Bar -->
+  <div class="max-w-[1000px] mx-auto px-6 h-20 flex items-center justify-between">
+    <!-- Left Side: Logo & Nav Pills -->
+    <div class="flex-1 h-full flex items-center gap-8">
+      <!-- Logo -->
+      <a
+        href="#"
+        class="text-2xl font-bold tracking-tight"
+        [class.text-gray-900]="isScrolled() || showMegaMenu()"
+        [class.text-white]="!isScrolled() && !showMegaMenu()"
+        >Moneytor</a
+      >
 
-            <!-- Nav Pills -->
-            <div (mouseenter)="setIsNavHovered(true)" (mouseleave)="setIsNavHovered(false)"
-                class="flex-1 h-full flex items-center">
-                <nav class="hidden md:flex p-1">
-                    @for (item of navItems; track item.id) {
-                    <button (mouseenter)="setActiveTab(item.id)"
-                        class="px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200"
-                        [class.bg-gray-200]="showMegaMenu() && activeTab() === item.id"
-                        [class.text-gray-900]="showMegaMenu() && activeTab() === item.id"
-                        [class.text-gray-600]="!showMegaMenu() || activeTab() !== item.id"
-                        [class.hover:text-gray-900]="!showMegaMenu() || activeTab() !== item.id">
-                        {{ item.label }}
-                    </button>
-                    }
-                </nav>
-            </div>
-        </div>
-
-        <!-- Right Side: Actions -->
-        <div class="flex items-center gap-4">
+      <!-- Nav Pills -->
+      <div
+        (mouseenter)="setIsNavHovered(true)"
+        (mouseleave)="setIsNavHovered(false)"
+        class="flex-1 h-full flex items-center"
+      >
+        <nav class="hidden md:flex p-1">
+          @for (item of navItems; track item.id) {
             <button
-                class="px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-black hover:text-white transition-colors"
-                [class.text-black]="showMegaMenu()" [class.text-gray-600]="!showMegaMenu()">
-                Log in
+              (mouseenter)="setActiveTab(item.id)"
+              class="px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200"
+              [class.bg-gray-200]="showMegaMenu() && activeTab() === item.id"
+              [class.text-gray-900]="showMegaMenu() && activeTab() === item.id"
+              [class.text-gray-600]="
+                (isScrolled() && !showMegaMenu()) || (activeTab() !== item.id && showMegaMenu())
+              "
+              [class.text-white]="!isScrolled() && !showMegaMenu() && activeTab() !== item.id"
+              [class.hover:text-gray-900]="showMegaMenu() || isScrolled()"
+              [class.hover:text-white]="!showMegaMenu() && !isScrolled()"
+            >
+              {{ item.label }}
             </button>
-            <button
-                class="px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition-colors"
-                [class.bg-black]="showMegaMenu()" [class.text-white]="showMegaMenu()" [class.bg-white]="!showMegaMenu()"
-                [class.text-black]="!showMegaMenu()">
-                Sign up
-            </button>
-        </div>
+          }
+        </nav>
+      </div>
     </div>
 
-    <!-- Mega Menu -->
-    @if (showMegaMenu()) {
-    <div class="border-t border-gray-100 bg-white animate-in fade-in slide-in-from-top-2 duration-200"
-        (mouseenter)="setMegaMenuHovered(true)" (mouseleave)="setMegaMenuHovered(false)">
-        <div class="max-w-[1000px] mx-auto px-6 py-12">
+    <!-- Right Side: Actions -->
+    <div class="flex items-center gap-4">
+      <button
+        class="px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-black hover:text-white transition-colors"
+        [class.text-black]="showMegaMenu() || isScrolled()"
+        [class.text-white]="!showMegaMenu() && !isScrolled()"
+      >
+        Log in
+      </button>
+      <button
+        class="px-5 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-gray-300 transition-colors"
+        [class.bg-black]="showMegaMenu() || isScrolled()"
+        [class.text-white]="showMegaMenu() || isScrolled()"
+        [class.bg-white]="!showMegaMenu() && !isScrolled()"
+        [class.text-black]="!showMegaMenu() && !isScrolled()"
+      >
+        Sign up
+      </button>
+    </div>
+  </div>
 
-            <!-- Mega Menu Header -->
-            @if (activeMenuData()?.header) {
-            <div class="px-4 flex items-center gap-2 mb-10 group cursor-pointer w-fit">
-                <h2 class="text-2xl font-semibold">{{ activeMenuData()?.header }}</h2>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="w-5 h-5 transition-transform group-hover:translate-x-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-            </div>
-            }
+  <!-- Mega Menu -->
+  @if (showMegaMenu()) {
+    <div
+      class="border-t border-gray-100 bg-white animate-in fade-in slide-in-from-top-2 duration-200"
+      (mouseenter)="setMegaMenuHovered(true)"
+      (mouseleave)="setMegaMenuHovered(false)"
+    >
+      <div class="max-w-[1000px] mx-auto px-6 py-12">
+        <!-- Mega Menu Header -->
+        @if (activeMenuData()?.header) {
+          <div class="px-4 flex items-center gap-2 mb-10 group cursor-pointer w-fit">
+            <h2 class="text-2xl font-semibold">{{ activeMenuData()?.header }}</h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-5 h-5 transition-transform group-hover:translate-x-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </div>
+        }
 
-            <!-- Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-                @for (column of activeMenuData()?.columns; track column.title + $index) {
-                <div>
-                    @if (column.title) {
-                    <h3 class="text-gray-800 font-medium mb-4 px-4">{{ column.title }}</h3>
-                    }
-                    <ul class="space-y-3">
-                        @for (item of column.items; track item) {
-                        <li>
-                            <a href="#"
-                                class="text-gray-700 hover:bg-gray-50 transition-colors block px-4 py-2 rounded-full">
-                                {{ item }}
-                            </a>
-                        </li>
-                        }
-                    </ul>
-                </div>
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+          @for (column of activeMenuData()?.columns; track column.title + $index) {
+            <div>
+              @if (column.title) {
+                <h3 class="text-gray-800 font-medium mb-4 px-4">{{ column.title }}</h3>
+              }
+              <ul class="space-y-3">
+                @for (item of column.items; track item) {
+                  <li>
+                    <a
+                      href="#"
+                      class="text-gray-700 hover:bg-gray-50 transition-colors block px-4 py-2 rounded-full"
+                    >
+                      {{ item }}
+                    </a>
+                  </li>
                 }
+              </ul>
             </div>
+          }
         </div>
+      </div>
     </div>
-    }
-
+  }
 </header>
