@@ -1,0 +1,71 @@
+@if (data(); as menuData) {
+  <div class="max-w-[1000px] mx-auto">
+    <!-- Mega Menu Header -->
+    @if (menuData.header) {
+      <div class="px-4 py-2 flex items-center gap-2 mb-3 group cursor-pointer w-fit">
+        <h2 class="text-[1.375rem] font-medium leading-[1.625rem] tracking-[-0.01375rem]">
+          {{ menuData.header }}
+        </h2>
+        <span
+          class="w-[24px] h-[24px] block bg-current"
+          style="
+            mask-image: url('assets/icons/arrow-thin-right.svg');
+            mask-repeat: no-repeat;
+            mask-position: center;
+          "
+        ></span>
+      </div>
+    }
+
+    <!-- Mobile View (Stacked) -->
+    <div class="block md:hidden grid grid-cols-1 gap-y-12 gap-x-8">
+      @for (column of menuData.columns; track column.title) {
+        <ng-container *ngTemplateOutlet="linkItem; context: { $implicit: column }"></ng-container>
+      }
+    </div>
+
+    <!-- Tablet View (4 Columns) -->
+    <div class="hidden md:flex lg:hidden gap-4">
+      @for (colGroup of mdColumns; track $index) {
+        <div class="flex-1 flex flex-col">
+          @for (column of colGroup; track column.title) {
+            <ng-container
+              *ngTemplateOutlet="linkItem; context: { $implicit: column }"
+            ></ng-container>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Desktop View (6 Columns) -->
+    <div class="hidden lg:flex gap-6">
+      @for (colGroup of lgColumns; track $index) {
+        <div class="flex-1 flex flex-col">
+          @for (column of colGroup; track column.title) {
+            <ng-container
+              *ngTemplateOutlet="linkItem; context: { $implicit: column }"
+            ></ng-container>
+          }
+        </div>
+      }
+    </div>
+
+    <ng-template #linkItem let-column>
+      <div [class.pr-4]="column.title" [class.pb-2]="column.title">
+        @if (column.title) {
+          <h3 class="font-medium px-4 py-2 text-base leading-[1.375rem]">
+            {{ column.title }}
+          </h3>
+        }
+        @for (link of column.links; track link) {
+          <a
+            href="#"
+            class="block px-4 py-2 rounded-full font-thin text-[0.875rem] leading-[1.375rem] tracking-[0.01125rem] transition-colors hover:bg-gray-50"
+          >
+            {{ link }}
+          </a>
+        }
+      </div>
+    </ng-template>
+  </div>
+}

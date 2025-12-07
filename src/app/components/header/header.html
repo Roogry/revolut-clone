@@ -1,31 +1,31 @@
 <header
-  class="fixed top-0 left-0 w-full z-50 font-aeonik-pro transition-all duration-300"
-  [class.bg-white]="showMegaMenu()"
-  [class.bg-white/80]="isScrolled() && !showMegaMenu()"
-  [class.backdrop-blur-lg]="isScrolled() && !showMegaMenu()"
-  [class.bg-transparent]="!isScrolled() && !showMegaMenu()"
-  [class.-translate-y-full]="isHidden()"
+  class="fixed top-0 left-0 w-full z-50 border-b border-[#ebebf0] transition-all duration-300"
+  [class.bg-white]="showMegaMenu() || isMobileMenuOpen()"
+  [class.bg-white/80]="isScrolled() && !showMegaMenu() && !isMobileMenuOpen()"
+  [class.backdrop-blur-lg]="isScrolled() && !showMegaMenu() && !isMobileMenuOpen()"
+  [class.bg-transparent]="!isScrolled() && !showMegaMenu() && !isMobileMenuOpen()"
+  [class.-translate-y-full]="isHidden() && !isMobileMenuOpen()"
 >
   <!-- Top Navigation Bar -->
-  <div class="max-w-[1000px] mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-[1000px] mx-auto px-5 py-3 lg:px-6 lg:py-4 flex items-center justify-between">
     <!-- Left Side: Logo & Nav Pills -->
     <div class="flex-1 h-full flex items-center gap-8">
       <!-- Logo -->
       <a
         href="#"
-        class="text-2xl font-bold tracking-tight"
-        [class.text-gray-900]="isScrolled() || showMegaMenu()"
-        [class.text-white]="!isScrolled() && !showMegaMenu()"
+        class="text-2xl font-bold tracking-tight z-50 relative"
+        [class.text-gray-900]="isScrolled() || showMegaMenu() || isMobileMenuOpen()"
+        [class.text-white]="!isScrolled() && !showMegaMenu() && !isMobileMenuOpen()"
         >Moneytor</a
       >
 
-      <!-- Nav Pills -->
+      <!-- Nav Pills (Desktop) -->
       <div
         (mouseenter)="setIsNavHovered(true)"
         (mouseleave)="setIsNavHovered(false)"
-        class="flex-1 h-full flex items-center"
+        class="hidden lg:flex flex-1 h-full items-center"
       >
-        <nav class="hidden md:flex p-1">
+        <nav class="flex p-1">
           @for (item of navItems; track item.id) {
             <button
               (mouseenter)="setActiveTab(item.id)"
@@ -46,8 +46,8 @@
       </div>
     </div>
 
-    <!-- Right Side: Actions -->
-    <div class="flex items-center gap-4 text-base leading-[1.375rem] font-medium">
+    <!-- Right Side: Actions (Desktop) -->
+    <div class="hidden lg:flex items-center gap-4 text-base leading-[1.375rem] font-medium">
       <button
         class="px-6 py-[10px] rounded-full cursor-pointer hover:bg-black hover:text-white transition-colors"
         [class.text-black]="showMegaMenu() || isScrolled()"
@@ -65,7 +65,90 @@
         Sign up
       </button>
     </div>
+
+    <!-- Hamburger Button (Mobile/Tablet) -->
+    <button
+      class="lg:hidden z-50 p-[0.125rem]"
+      (click)="toggleMobileMenu()"
+      [class.text-gray-900]="isScrolled() || showMegaMenu() || isMobileMenuOpen()"
+      [class.text-white]="!isScrolled() && !showMegaMenu() && !isMobileMenuOpen()"
+    >
+      @if (isMobileMenuOpen()) {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-[1.325rem]"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      } @else {
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-[1.325rem]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      }
+    </button>
   </div>
+
+  <!-- Mobile Menu Overlay -->
+  @if (isMobileMenuOpen()) {
+    <div
+      class="fixed inset-0 bg-white z-40 mt-[56px] flex flex-col lg:hidden animate-in fade-in slide-in-from-top-4 duration-300"
+    >
+      <div class="p-6 overflow-y-auto">
+        <!-- Nav Pills Strip -->
+        <div class="mb-4 overflow-x-auto">
+          <div class="flex gap-2">
+            @for (item of navItems; track item.id) {
+              <button
+                class="px-2.5 py-[8px] rounded-full text-base leading-[1.375rem] font-medium whitespace-nowrap transition-colors hover:bg-[#e2e2e7] hover:opacity-100"
+                [class.bg-[#e2e2e7]/70]="mobileActiveTab() === item.id"
+                (click)="setMobileActiveTab(item.id)"
+              >
+                {{ item.label }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Mega Menu Content -->
+        <div class="flex-1">
+          <app-mega-menu [data]="mobileMenuData()"></app-mega-menu>
+        </div>
+      </div>
+
+      <!-- Sticky Bottom Actions -->
+      <div class="mt-auto p-3 border-t border-gray-100 bg-[#f7f7f7] shrink-0 sticky-bottom-action">
+        <div class="flex items-center justify-center gap-4">
+          <button
+            class="py-[10px] px-6 rounded-full text-[#191c1f] bg-white cursor-pointer transition-colors hover:bg-gray-200 hover:opacity-[.85]"
+            (click)="toggleMobileMenu()"
+          >
+            Log in
+          </button>
+          <button
+            class="py-[10px] px-6 rounded-full text-white bg-[#191c1f] cursor-pointer transition-colors hover:opacity-[.85]"
+            (click)="toggleMobileMenu()"
+          >
+            Sign up
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 
   <!-- Mega Menu -->
   @if (showMegaMenu()) {
@@ -74,51 +157,7 @@
       (mouseenter)="setMegaMenuHovered(true)"
       (mouseleave)="setMegaMenuHovered(false)"
     >
-      <div class="max-w-[1000px] mx-auto px-6 py-12">
-        <!-- Mega Menu Header -->
-        @if (activeMenuData()?.header) {
-          <div class="px-4 flex items-center gap-2 mb-10 group cursor-pointer w-fit">
-            <h2 class="text-2xl font-semibold">{{ activeMenuData()?.header }}</h2>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-5 h-5 transition-transform group-hover:translate-x-1"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </div>
-        }
-
-        <!-- Grid Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-          @for (column of activeMenuData()?.columns; track column.title + $index) {
-            <div>
-              @if (column.title) {
-                <h3 class="text-gray-800 font-medium mb-4 px-4">{{ column.title }}</h3>
-              }
-              <ul class="space-y-3">
-                @for (item of column.items; track item) {
-                  <li>
-                    <a
-                      href="#"
-                      class="text-gray-700 hover:bg-gray-50 transition-colors block px-4 py-2 rounded-full"
-                    >
-                      {{ item }}
-                    </a>
-                  </li>
-                }
-              </ul>
-            </div>
-          }
-        </div>
-      </div>
+      <app-mega-menu [data]="activeMenuData()"></app-mega-menu>
     </div>
   }
 </header>

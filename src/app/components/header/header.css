@@ -1,4 +1,11 @@
 /* Add any specific styles here if Tailwind utilities aren't enough */
 :host {
-    display: block;
+  display: block;
+}
+
+.sticky-bottom-action {
+  box-shadow:
+    rgba(25, 28, 31, 0.04) 0px -1px 0px,
+    rgba(25, 28, 31, 0.04) 0px 8px 16px,
+    rgba(25, 28, 31, 0.04) 0px 14px 28px;
 }

@@ -10,11 +10,12 @@ import {
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { fromEvent, throttleTime } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MegaMenuComponent, MegaMenuData } from '../mega-menu/mega-menu';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MegaMenuComponent],
   templateUrl: './header.html',
   styleUrl: './header.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,6 +30,8 @@ export class HeaderComponent {
   private readonly document = inject(DOCUMENT);
 
   protected readonly showMegaMenu = computed(() => this.isNavHovered() || this.isMegaMenuHovered());
+  protected readonly isMobileMenuOpen = signal(false);
+  protected readonly mobileActiveTab = signal<string>('personal');
 
   protected readonly isHidden = signal(false);
   private lastScrollY = 0;
@@ -70,16 +73,13 @@ export class HeaderComponent {
     { id: 'company', label: 'Company' },
   ];
 
-  protected readonly menuData: Record<
-    string,
-    { header: string; columns: { title: string; items: string[] }[] }
-  > = {
+  protected readonly menuData: Record<string, MegaMenuData> = {
     personal: {
       header: 'Discover Revolut',
       columns: [
         {
           title: 'Accounts',
-          items: [
+          links: [
             'Personal Account',
             'Joint Account',
             'Professional Account',
@@ -87,10 +87,14 @@ export class HeaderComponent {
             'For ages 16-17',
             'Parents and guardians',
           ],
+          mdColumn: 1,
+          mdRow: 1,
+          lgColumn: 1,
+          lgRow: 1,
         },
         {
           title: 'Smart Spending',
-          items: [
+          links: [
             'Cards',
             'Send & Receive',
             'Revolut Pay',
@@ -98,35 +102,63 @@ export class HeaderComponent {
             'RevPoints',
             'Linked Accounts',
           ],
+          mdColumn: 1,
+          mdRow: 2,
+          lgColumn: 1,
+          lgRow: 2,
         },
         {
           title: 'Security & Protection',
-          items: [
+          links: [
             'How We Protect Your Money',
             'Report Lost Device',
             'Learn About Fraud & Scams',
             'Consumer Security Insight Report',
           ],
+          mdColumn: 1,
+          mdRow: 3,
+          lgColumn: 2,
+          lgRow: 1,
         },
         {
           title: 'Investments',
-          items: ['Stocks', 'Stocks & Shares ISA', 'Commodities'],
+          links: ['Stocks', 'Stocks & Shares ISA', 'Commodities'],
+          mdColumn: 2,
+          mdRow: 1,
+          lgColumn: 2,
+          lgRow: 2,
         },
         {
           title: 'Crypto',
-          items: ['Crypto', 'Revolut Ramp', 'Revolut X'],
+          links: ['Crypto', 'Revolut Ramp', 'Revolut X'],
+          mdColumn: 2,
+          mdRow: 2,
+          lgColumn: 2,
+          lgRow: 3,
         },
         {
           title: 'Global Finances',
-          items: ['International Transfers', 'eSIM Data Plans'],
+          links: ['International Transfers', 'eSIM Data Plans'],
+          mdColumn: 2,
+          mdRow: 3,
+          lgColumn: 3,
+          lgRow: 1,
         },
         {
           title: 'Help',
-          items: ['Contact Us', 'Help Centre', 'System Status'],
+          links: ['Contact Us', 'Help Centre', 'System Status'],
+          mdColumn: 2,
+          mdRow: 4,
+          lgColumn: 3,
+          lgRow: 2,
         },
         {
           title: 'Plans',
-          items: ['Standard', 'Plus', 'Premium', 'Metal', 'Ultra', 'Compare Plans'],
+          links: ['Standard', 'Plus', 'Premium', 'Metal', 'Ultra', 'Compare Plans'],
+          mdColumn: 1,
+          mdRow: 4,
+          lgColumn: 4,
+          lgRow: 1,
         },
       ],
     },
@@ -135,21 +167,29 @@ export class HeaderComponent {
       columns: [
         {
           title: 'Essentials',
-          items: [
+          links: [
             'Multi-Currency Account',
             'Expense Management',
             'Corporate Cards',
             'Money Transfers',
             'Bills',
           ],
+          mdColumn: 1,
+          mdRow: 1,
+          lgColumn: 1,
+          lgRow: 1,
         },
         {
           title: 'Treasury',
-          items: ['Currency Exchange', 'Savings', 'Crypto'],
+          links: ['Currency Exchange', 'Savings', 'Crypto'],
+          mdColumn: 1,
+          mdRow: 2,
+          lgColumn: 1,
+          lgRow: 2,
         },
         {
           title: 'Accept payments',
-          items: [
+          links: [
             'Accept Payments',
             'Revolut Terminal',
             'Payment Links',
@@ -160,28 +200,75 @@ export class HeaderComponent {
             'Invoices',
             'Revolut Ramp',
           ],
+          mdColumn: 1,
+          mdRow: 3,
+          lgColumn: 2,
+          lgRow: 1,
+        },
+        {
+          title: 'Platform',
+          links: ['Analytics', 'Business APIs', 'Integrations', 'Rewards'],
+          mdColumn: 2,
+          mdRow: 1,
+          lgColumn: 2,
+          lgRow: 2,
         },
         {
           title: 'Revolut People',
-          items: ['Platform', 'Performance', 'Recruitment', 'HR'],
+          links: ['Platform', 'Performance', 'Recruitment', 'HR'],
+          mdColumn: 2,
+          mdRow: 2,
+          lgColumn: 3,
+          lgRow: 1,
         },
         {
           title: 'Solutions',
-          items: ['Travel', 'Ecommerce', 'Marketing agencies'],
+          links: ['Travel', 'Ecommerce', 'Marketing agencies'],
+          mdColumn: 2,
+          mdRow: 3,
+          lgColumn: 3,
+          lgRow: 2,
+        },
+        {
+          title: 'Help & Resources',
+          links: [
+            'Customer Help',
+            'Customer Stories',
+            'Business Resources',
+            'How we protect your money',
+            'System Status',
+            'Learn About Fraud & Scams',
+            'Whats New',
+          ],
+          mdColumn: 2,
+          mdRow: 3,
+          lgColumn: 3,
+          lgRow: 3,
         },
         {
           title: 'Plans',
-          items: ['Business Account Pricing', 'Payment Acceptance Pricing'],
+          links: ['Business Account Pricing', 'Payment Acceptance Pricing'],
+          mdColumn: 1,
+          mdRow: 4,
+          lgColumn: 4,
+          lgRow: 1,
         },
       ],
     },
     kids: {
       header: '', // No specific header shown in the crop, or we can omit
       columns: [
-        { title: '', items: ['For ages 6-15'] },
-        { title: '', items: ['For ages 16-17'] },
-        { title: '', items: ['Parents and guardians'] },
-        { title: '', items: ['Help Center'] },
+        { title: '', links: ['For ages 6-15'], mdColumn: 1, mdRow: 1, lgColumn: 1, lgRow: 1 },
+        { title: '', links: ['For ages 16-17'], mdColumn: 1, mdRow: 2, lgColumn: 2, lgRow: 1 },
+        {
+          title: '',
+          links: ['Parents and guardians'],
+          mdColumn: 2,
+          mdRow: 1,
+          lgColumn: 3,
+          lgRow: 1,
+        },
+        { title: '', links: ['Help Center'], mdColumn: 2, mdRow: 2, lgColumn: 4, lgRow: 1 },
       ],
     },
     company: {
@@ -189,11 +276,15 @@ export class HeaderComponent {
       columns: [
         {
           title: 'General',
-          items: ['About Us', 'Blog', 'News & Media', 'Revolut Reviews'],
+          links: ['About Us', 'Blog', 'News & Media', 'Revolut Reviews'],
+          mdColumn: 1,
+          mdRow: 1,
+          lgColumn: 1,
+          lgRow: 1,
         },
         {
           title: 'Careers',
-          items: [
+          links: [
             'Careers',
             'Working at Revolut',
             'Culture',
@@ -202,10 +293,18 @@ export class HeaderComponent {
             'Diversity & Inclusion',
             'Relocation with Revolut',
           ],
+          mdColumn: 2,
+          mdRow: 1,
+          lgColumn: 2,
+          lgRow: 1,
         },
         {
           title: 'Shareholder Relations',
-          items: ['Annual Report 2024', 'Reports and results'],
+          links: ['Annual Report 2024', 'Reports and results'],
+          mdColumn: 3,
+          mdRow: 1,
+          lgColumn: 3,
+          lgRow: 1,
         },
       ],
     },
@@ -216,8 +315,16 @@ export class HeaderComponent {
     return tabId ? this.menuData[tabId] : null;
   });
 
+  protected readonly mobileMenuData = computed(() => {
+    return this.menuData[this.mobileActiveTab()];
+  });
+
   setActiveTab(id: string | null) {
     this.activeTab.set(id);
+  }
+
+  setMobileActiveTab(id: string) {
+    this.mobileActiveTab.set(id);
   }
 
   setMegaMenuHovered(isHovered: boolean) {
@@ -226,5 +333,9 @@ export class HeaderComponent {
 
   setIsNavHovered(isHovered: boolean) {
     this.isNavHovered.set(isHovered);
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.update((v) => !v);
   }
 }
