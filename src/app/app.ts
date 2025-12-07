@@ -7,8 +7,8 @@ import { FooterComponent } from './components/footer/footer';
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('jodie-moneytor-test');
+  protected readonly title = signal('revolut-clone');
 }

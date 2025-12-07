@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "jodie-moneytor-test": {
+    "revolut-clone": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -25,9 +25,7 @@
               },
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -57,10 +55,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "jodie-moneytor-test:build:production"
+              "buildTarget": "revolut-clone:build:production"
             },
             "development": {
-              "buildTarget": "jodie-moneytor-test:build:development"
+              "buildTarget": "revolut-clone:build:development"
             }
           },
           "defaultConfiguration": "development"
