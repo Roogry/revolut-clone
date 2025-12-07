@@ -4,6 +4,7 @@
   [class.bg-white/80]="isScrolled() && !showMegaMenu()"
   [class.backdrop-blur-lg]="isScrolled() && !showMegaMenu()"
   [class.bg-transparent]="!isScrolled() && !showMegaMenu()"
+  [class.-translate-y-full]="isHidden()"
 >
   <!-- Top Navigation Bar -->
   <div class="max-w-[1000px] mx-auto px-6 py-4 flex items-center justify-between">
