@@ -55,3 +55,7 @@
   --font-aeonik-pro: 'Aeonik Pro', sans-serif;
   --font-inter: 'Inter Variable', sans-serif;
 }
+
+html {
+  font-family: var(--font-aeonik-pro);
+}
