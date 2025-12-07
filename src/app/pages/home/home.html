@@ -1,30 +1,14 @@
 <section class="relative min-h-screen w-full overflow-hidden">
-  <div class="min-h-full relative z-10 pt-[56px] pb-6 px-5">
-    <div class="absolute inset-0 -z-10 overflow-hidden bg-hero-sky">
-      <img
-        ngSrc="assets/images/blue_sky_background.png"
-        alt="Blue Sky Background"
-        fill
-        priority
-        class="object-cover"
-      />
-    </div>
+  <div class="min-h-full relative z-10 pt-[56px] pb-6 px-5 lg:h-screen overflow-hidden">
     <div
-      class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[201.6vh] h-[112vh] min-h-[370px] min-w-[665px]"
+      class="max-w-[1000px] mx-auto px-5 pt-8 pb-6 flex flex-col items-start gap-6 md:pt-12 lg:px-0"
     >
-      <img
-        ngSrc="assets/images/woman-confident.png"
-        alt="Woman Confident"
-        fill
-        priority
-        class="object-cover"
-      />
-    </div>
-    <div class="pt-12 flex flex-col items-start gap-6">
-      <h1 class="text-[5rem] font-medium text-white leading-[1] tracking-[-0.13rem]">
+      <h1
+        class="text-[3rem] font-medium text-white leading-[1] tracking-[-0.13rem] md:text-[6.5rem] md:tracking-[-0.13rem]"
+      >
         Change the way you money
       </h1>
-      <p class="text-[1.125rem] leading-[1.5rem] text-white">
+      <p class="w-full text-[1.125rem] leading-[1.5rem] text-white lg:w-[40%]">
         Home or away, local or global — move freely between countries and currencies. Sign up for
         free, in a tap.
       </p>
@@ -35,14 +19,37 @@
       >
     </div>
 
-    <div class="mt-8 flex items-center justify-center">
-      <div class="relative mb-4 w-[49.6063vh] border-[#c9c9cd] border-[3px] rounded-[2.5vh]">
+    <div class="-z-10 absolute inset-0 overflow-hidden bg-hero-sky">
+      <img
+        ngSrc="assets/images/blue_sky_background.png"
+        alt="Blue Sky Background"
+        fill
+        priority
+        class="object-cover"
+      />
+    </div>
+    <div
+      class="-z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[201.6vh] h-[112vh] min-h-[370px] min-w-[665px] lg:origin-[50%_100%] lg:w-[126vh] lg:h-[70vh] lg:scale-[1.75]"
+    >
+      <img
+        ngSrc="assets/images/woman-confident.png"
+        alt="Woman Confident"
+        fill
+        priority
+        class="object-cover"
+      />
+    </div>
+
+    <div class="-z-10 mt-8 flex items-center justify-center">
+      <div
+        class="relative mb-4 w-[49.6063vh] border-[#c9c9cd] border-[3px] rounded-[2.5vh] lg:-translate-y-[42%] lg:origin-[50%_100%] lg:scale-[1]"
+      >
         <div class="absolute w-full h-full">
           <img
             ngSrc="assets/images/hero-account-sample.png"
             alt="Account Sample"
             fill
-            class="object-contain -z-10"
+            class="object-contain"
           />
         </div>
         <div class="w-full h-[0]" style="padding-bottom: calc(1 / 0.7086614173228346 * 100%)"></div>
