@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { ParallaxDirective } from '../../shared/directives/parallax.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, ParallaxDirective],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

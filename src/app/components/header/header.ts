@@ -8,8 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { fromEvent, throttleTime } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest, fromEvent, throttleTime, debounceTime } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MegaMenuComponent, MegaMenuData } from '../mega-menu/mega-menu';
 
 @Component({
@@ -37,9 +37,22 @@ export class HeaderComponent {
   private lastScrollY = 0;
 
   constructor() {
+    combineLatest([toObservable(this.isNavHovered), toObservable(this.isMegaMenuHovered)])
+      .pipe(debounceTime(50), takeUntilDestroyed())
+      .subscribe(([navHovered, menuHovered]) => {
+        if (!navHovered && !menuHovered) {
+          this.activeTab.set(null);
+        }
+      });
+
     effect(() => {
-      if (!this.isNavHovered() && !this.isMegaMenuHovered()) {
-        this.activeTab.set(null);
+      if (isPlatformBrowser(this.platformId)) {
+        const shouldLockScroll = this.showMegaMenu() || this.isMobileMenuOpen();
+        if (shouldLockScroll) {
+          this.document.body.classList.add('overflow-hidden');
+        } else {
+          this.document.body.classList.remove('overflow-hidden');
+        }
       }
     });
 
@@ -312,7 +325,7 @@ export class HeaderComponent {
 
   protected readonly activeMenuData = computed(() => {
     const tabId = this.activeTab();
-    return tabId ? this.menuData[tabId] : null;
+    return tabId ? this.menuData[tabId] : this.menuData['personal'];
   });
 
   protected readonly mobileMenuData = computed(() => {

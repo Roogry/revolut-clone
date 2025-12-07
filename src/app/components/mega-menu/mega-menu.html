@@ -25,7 +25,7 @@
     </div>
 
     <!-- Tablet View (4 Columns) -->
-    <div class="hidden md:flex lg:hidden gap-4">
+    <div class="hidden md:flex lg:hidden gap-4 pb-6">
       @for (colGroup of mdColumns; track $index) {
         <div class="flex-1 flex flex-col">
           @for (column of colGroup; track column.title) {
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Desktop View (6 Columns) -->
-    <div class="hidden lg:flex gap-6">
+    <div class="hidden lg:flex gap-6 pb-6">
       @for (colGroup of lgColumns; track $index) {
         <div class="flex-1 flex flex-col">
           @for (column of colGroup; track column.title) {
